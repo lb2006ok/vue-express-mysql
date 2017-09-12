@@ -5,6 +5,7 @@
       <input type="text" name="username" v-model="userName"> <br>
       <input type="text" name="age" v-model="age"> <br>
       <a href="javascript:;" @click="addUser">提交</a>
+      <a href="javascript:;" @click="getUser">查询</a>
     </form>
   </div>
 </template>
@@ -22,10 +23,19 @@
             addUser() {
                 var name = this.userName;
                 var age = this.age;
-                this.$http.post('/api/user/addUser', {
+                this.$http.post('http://localhost:3000/api/user/addUser', {
                     username: name,
                     age: age
-                }, {}).then((response) => {
+                }).then((response) => {
+                    console.log(response);
+                })
+            },
+            getUser(){
+                this.$http.get('http://localhost:3000/api/user/getUser',{
+                    params: {
+                        id: 1
+                    }
+                }).then((response)=>{
                     console.log(response);
                 })
             }
